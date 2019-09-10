@@ -35,7 +35,7 @@ class CpuinfoConan(ConanFile):
 
     def source(self):
         git = tools.Git(folder="source_subfolder")
-        git.clone("git@github.com:pytorch/cpuinfo.git", shallow=True)
+        git.clone("https://github.com/pytorch/cpuinfo.git", shallow=True)
         git.checkout("d5e37adf1406cf899d7d9ec1d317c47506ccb970")
 
     def _configure_cmake(self):
