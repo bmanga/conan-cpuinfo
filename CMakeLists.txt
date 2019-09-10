@@ -8,4 +8,6 @@ else()
 endif()
 conan_basic_setup()
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 add_subdirectory("source_subfolder")
