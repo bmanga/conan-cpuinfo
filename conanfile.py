@@ -20,7 +20,7 @@ class CpuinfoConan(ConanFile):
     # Options may need to change depending on the packaged library.
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": True, "fPIC": True}
+    default_options = {"shared": False, "fPIC": True}
 
     # Custom attributes for Bincrafters recipe conventions
     _source_subfolder = "source_subfolder"
@@ -38,6 +38,7 @@ class CpuinfoConan(ConanFile):
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["CPUINFO_LIBRARY_TYPE"] = "shared" if self.options.shared else "static"
+        cmake.definitions["CPUINFO_RUNTIME_TYPE"] = "shared" if self.options.shared else "static"
         cmake.definitions["CPUINFO_BUILD_TOOLS"] = False
         cmake.definitions["CPUINFO_BUILD_UNIT_TESTS"] = False
         cmake.definitions["CPUINFO_BUILD_MOCK_TESTS"] = False
@@ -56,4 +57,9 @@ class CpuinfoConan(ConanFile):
         cmake.install()
         
     def package_info(self):
-        self.cpp_info.libs = tools.collect_libs(self)
+        self.cpp_info.libs = ["cpuinfo"]
+
+        if not self.options.shared:
+            self.cpp_info.libs.append["clog"]
+            if not self.settings.os == 'Windows':
+                self.cpp_info.libs.append('pthread')

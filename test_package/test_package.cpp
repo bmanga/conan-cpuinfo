@@ -1,5 +1,7 @@
 #include <iostream>
+extern "C" {
 #include <cpuinfo.h>
+}
 
 int main()
 {
