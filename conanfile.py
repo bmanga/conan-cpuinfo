@@ -60,6 +60,6 @@ class CpuinfoConan(ConanFile):
         self.cpp_info.libs = ["cpuinfo"]
 
         if not self.options.shared:
-            self.cpp_info.libs.append["clog"]
+            self.cpp_info.libs.append("clog")
             if not self.settings.os == 'Windows':
                 self.cpp_info.libs.append('pthread')
