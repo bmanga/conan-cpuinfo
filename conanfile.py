@@ -55,11 +55,19 @@ class CpuinfoConan(ConanFile):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
         cmake = self._configure_cmake()
         cmake.install()
+
+        include_folder = os.path.join(self._source_subfolder, "include")
+        self.copy(pattern="*", dst="include", src=include_folder)
+        self.copy(pattern="*.dll", dst="bin", keep_path=False)
+        self.copy(pattern="*.lib", dst="lib", keep_path=False)
+        self.copy(pattern="*.a", dst="lib", keep_path=False)
+        self.copy(pattern="*.so*", dst="lib", keep_path=False)
+        self.copy(pattern="*.dylib", dst="lib", keep_path=False)
         
     def package_info(self):
         self.cpp_info.libs = ["cpuinfo"]
 
         if not self.options.shared:
             self.cpp_info.libs.append("clog")
-            if not self.settings.os == 'Windows':
-                self.cpp_info.libs.append('pthread')
+            if not self.settings.os == "Windows":
+                self.cpp_info.libs.append("pthread")
