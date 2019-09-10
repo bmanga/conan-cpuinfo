@@ -5,13 +5,13 @@ import os
 class CpuinfoConan(ConanFile):
     name = "cpuinfo"
     version = "d5e37ad"
-    description = "Keep it short"
+    description = "A library to detect essential information about host CPU for performance optimization."
     # topics can get used for searches, GitHub topics, Bintray tags etc. Add here keywords about the library
-    topics = ("conan", "libname", "logging")
-    url = "https://github.com/bincrafters/conan-libname"
-    homepage = "https://github.com/original_author/original_lib"
+    topics = ("cpu", "performance", "optimization")
+    url = "https://github.com/bincrafters/conan-cpuinfo"
+    homepage = "https://github.com/pytorch/cpuinfo"
     author = "Bincrafters <bincrafters@gmail.com>"
-    license = "MIT"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
+    license = "BSD-2-Clause"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
     exports = ["LICENSE.md"]      # Packages the license for the conanfile.py
     # Remove following lines if the target lib does not use cmake.
     exports_sources = ["CMakeLists.txt"]
@@ -25,9 +25,6 @@ class CpuinfoConan(ConanFile):
     # Custom attributes for Bincrafters recipe conventions
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
-
-    def build_requirements(self):
-        self.build_requires("glog/0.4.0@bincrafters/stable")
 
     def config_options(self):
         if self.settings.os == 'Windows':

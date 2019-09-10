@@ -1,7 +1,9 @@
 #include <iostream>
+#include <cpuinfo.h>
 
 int main()
 {
-    std::cout << "Bincrafters\n";
-    return 0;
+	cpuinfo_initialize();
+    std::cout << "Bincrafters on " << cpuinfo_get_cores() " cores\n";
+    cpuinfo_deinitialize();
 }
